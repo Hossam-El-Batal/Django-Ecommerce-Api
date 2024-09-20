@@ -12,7 +12,7 @@ This project is a Django-based ecommerce API that provides functionalities for m
 ### Installation
 
 1. **Clone the repository**
-   git clone https://github.com/Hossam-El-Batal/Django-Ecommerce-Api.git
+   git clone https://github.com/Hossam-El-Batal/Django-Ecommerce-Api.git =>>
    cd Django-Ecommerce-Api
    
 3. **run poetry shell**
