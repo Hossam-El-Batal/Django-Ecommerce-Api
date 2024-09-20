@@ -33,6 +33,10 @@ class ProductSerializer(serializers.ModelSerializer):
         return value
 
     def validate(self, data):
-        if data.get('sale_price') and data.get('price') <= data['sale_price']:
-            raise serializers.ValidationError("Sale price must be less than the regular price.")
+        sale_price = data.get('sale_price')
+        price = data.get('price')
+
+        if sale_price is not None and price is not None:
+            if price <= sale_price:
+                raise serializers.ValidationError("Sale price must be less than the regular price")
         return data

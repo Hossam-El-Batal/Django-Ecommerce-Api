@@ -1,7 +1,11 @@
-from rest_framework import viewsets
+from rest_framework import viewsets 
+from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
 from .models import Product
+from cart.models import Cart
 from .serializers import ProductSerializer
+from decimal import Decimal, ROUND_DOWN
+
 
 
 
@@ -17,8 +21,8 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         self.check_admin(request)
-        return super().update(request, *args, **kwargs)
-
+        partial = kwargs.pop('partial', True) 
+        return super().update(request, *args, **kwargs, partial=partial)
     def destroy(self, request, *args, **kwargs):
         self.check_admin(request)
         return super().destroy(request, *args, **kwargs)
@@ -31,7 +35,6 @@ class ProductViewSet(viewsets.ModelViewSet):
         if not getattr(request.user, 'isAdmin', False):
             raise PermissionDenied("You do not have permission to perform this action")
     
-
 
 
     
